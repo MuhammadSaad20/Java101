@@ -1,0 +1,202 @@
+### **Mastering Math in Java: Min, Max, Ceil, Floor, Round, Random, Pi, Log, Sin, Cos, and More!**
+
+The `java.lang.Math` class provides a variety of methods to perform mathematical operations and calculations. It's an essential topic for interviews as it's used in problem-solving, algorithms, and utility implementations.
+
+---
+
+### **1. Key Math Class Features**
+- The `Math` class is part of `java.lang` (import not required).
+- All methods in the `Math` class are **static**, meaning you can call them directly using the class name without creating an object.
+- It includes methods for basic calculations, trigonometry, logarithms, rounding, and random number generation.
+
+---
+
+### **2. Common Methods in the Math Class**
+
+#### **a) Min and Max**
+- **`Math.min(a, b)`**: Returns the smaller of two values.
+- **`Math.max(a, b)`**: Returns the larger of two values.
+
+**Example:**
+```java
+int a = 10, b = 20;
+System.out.println(Math.min(a, b));  // Output: 10
+System.out.println(Math.max(a, b));  // Output: 20
+```
+
+---
+
+#### **b) Ceil, Floor, and Round**
+- **`Math.ceil(double)`**: Rounds up to the nearest integer (returns a double).
+- **`Math.floor(double)`**: Rounds down to the nearest integer (returns a double).
+- **`Math.round(double)`**: Rounds to the nearest integer (returns `long` or `int`).
+
+**Example:**
+```java
+double num = 5.6;
+System.out.println(Math.ceil(num));   // Output: 6.0
+System.out.println(Math.floor(num));  // Output: 5.0
+System.out.println(Math.round(num));  // Output: 6
+```
+
+---
+
+#### **c) Absolute Value**
+- **`Math.abs(a)`**: Returns the absolute value of a number (positive form).
+
+**Example:**
+```java
+int num = -15;
+System.out.println(Math.abs(num));  // Output: 15
+```
+
+---
+
+#### **d) Power and Square Root**
+- **`Math.pow(a, b)`**: Raises `a` to the power of `b` (`a^b`).
+- **`Math.sqrt(a)`**: Returns the square root of `a`.
+
+**Example:**
+```java
+System.out.println(Math.pow(2, 3));  // Output: 8.0
+System.out.println(Math.sqrt(16));  // Output: 4.0
+```
+
+---
+
+#### **e) Trigonometric Functions**
+- **`Math.sin(angle)`**, **`Math.cos(angle)`**, **`Math.tan(angle)`**: Calculate sine, cosine, and tangent of an angle (in radians).
+- **`Math.toRadians(deg)`**, **`Math.toDegrees(rad)`**: Convert between degrees and radians.
+
+**Example:**
+```java
+double angle = 45;
+double radian = Math.toRadians(angle);
+System.out.println(Math.sin(radian));  // Output: 0.7071067811865475
+System.out.println(Math.toDegrees(radian));  // Output: 45.0
+```
+
+---
+
+#### **f) Logarithmic Functions**
+- **`Math.log(a)`**: Returns the natural logarithm (base `e`) of `a`.
+- **`Math.log10(a)`**: Returns the logarithm (base 10) of `a`.
+
+**Example:**
+```java
+System.out.println(Math.log(2.71828));  // Output: ~1.0
+System.out.println(Math.log10(100));   // Output: 2.0
+```
+
+---
+
+#### **g) Constants**
+- **`Math.PI`**: Value of π (3.14159...).
+- **`Math.E`**: Value of Euler’s number (e ≈ 2.718).
+
+**Example:**
+```java
+System.out.println(Math.PI);  // Output: 3.141592653589793
+System.out.println(Math.E);   // Output: 2.718281828459045
+```
+
+---
+
+#### **h) Random Number Generation**
+- **`Math.random()`**: Returns a random number between `0.0` (inclusive) and `1.0` (exclusive).
+
+To generate random numbers in a range:
+```java
+int min = 5, max = 15;
+int randomNum = (int) (Math.random() * (max - min + 1)) + min;
+System.out.println(randomNum);  // Random number between 5 and 15
+```
+
+---
+
+### **3. Key Concepts for Interviews**
+1. **Difference Between Ceil, Floor, and Round**:
+   - `ceil(5.3)` → 6.0 (always rounds up).
+   - `floor(5.7)` → 5.0 (always rounds down).
+   - `round(5.5)` → 6 (rounds to the nearest integer).
+
+2. **Logarithm Use Cases**:
+   - Base conversions, growth calculations, and algorithms like binary search.
+
+3. **Random Number Generation**:
+   - Know how to generate random numbers in a specific range using `Math.random()`.
+
+4. **Trigonometric Functions**:
+   - Convert degrees to radians before using trigonometric methods.
+
+5. **Efficiency**:
+   - Math methods are optimized and faster than custom implementations.
+
+---
+
+### **4. Practical Coding Challenges**
+
+#### **Problem 1: Find the Hypotenuse**
+Given two sides of a right triangle, calculate the hypotenuse using the Pythagorean theorem.
+
+**Solution:**
+```java
+public class MathExample {
+    public static void main(String[] args) {
+        double a = 3, b = 4;
+        double hypotenuse = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+        System.out.println("Hypotenuse: " + hypotenuse);  // Output: 5.0
+    }
+}
+```
+
+---
+
+#### **Problem 2: Round a Number to 2 Decimal Places**
+**Solution:**
+```java
+double num = 5.67891;
+double rounded = Math.round(num * 100.0) / 100.0;
+System.out.println(rounded);  // Output: 5.68
+```
+
+---
+
+#### **Problem 3: Generate a Random Dice Roll**
+**Solution:**
+```java
+public class RandomExample {
+    public static void main(String[] args) {
+        int diceRoll = (int) (Math.random() * 6) + 1;
+        System.out.println("Dice roll: " + diceRoll);  // Random number between 1 and 6
+    }
+}
+```
+
+---
+
+### **5. Best Practices**
+1. Use `Math.random()` for basic random generation. For more control, use `java.util.Random`.
+2. Use `Math.ceil()` or `Math.floor()` for financial calculations like rounding up/down.
+3. When using trigonometric methods, always work in radians (convert degrees to radians if necessary).
+4. Avoid reimplementing mathematical formulas that are already part of the `Math` library.
+
+---
+
+### **6. Common Interview Questions**
+1. **How do you round a number to 2 decimal places in Java?**
+   - Multiply the number by 100, round it, and divide back by 100.
+
+2. **Write a program to calculate the area of a circle.**
+   - Use `Math.PI * Math.pow(radius, 2)`.
+
+3. **How would you generate random numbers within a specific range?**
+   - `(int) (Math.random() * (max - min + 1)) + min`.
+
+4. **What's the difference between `Math.log()` and `Math.log10()`?**
+   - `Math.log()` calculates the natural logarithm (base e).
+   - `Math.log10()` calculates the logarithm to base 10.
+
+5. **What is the return type of `Math.ceil()` and `Math.round()`?**
+   - `Math.ceil()` → `double`.
+   - `Math.round()` → `int` or `long` depending on the input type.

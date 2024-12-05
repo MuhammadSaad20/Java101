@@ -1,0 +1,105 @@
+Inheritance: Enables one class (child) to inherit properties and methods from another (parent),
+promoting code reuse.
+
+
+Why Inheritance? Suppose you’re developing software for a university.
+Both students and teachers share some common attributes like name and age but differ in others.
+
+
+
+How to DO?
+Common functionality is written once in the Person class and reused in Student and Teacher.
+This reduces redundancy and makes code easier to maintain.
+-----------------------------------------------------------------------------------------------------------
+
+NOTES:
+
+1- Inheritance does not automatically set the attributes.
+You need to use the inherited setters (setName() and setAge()) for Student and Teacher explicitly.
+
+2- Alternative: Constructor Chaining (parameterized constructor / super keyword)
+Another way to handle this is by using a constructor in the Person class & chaining it to Student and Teacher constructors
+----------------------------------------------------------------------------------------------------------------
+
+WHEN TO USED Chaining amd when to used get() and set()
+
+1. Default Constructor + Setters
+This approach uses an empty constructor and allows attributes to be set using setters.
+
+Pros:
+
+Flexibility: You can create an object without specifying all attributes initially and modify them later.
+
+Clarity: Code is simpler when dealing with frameworks or libraries that rely on default constructors
+(e.g., deserialization in JSON or XML parsing).
+
+Cons:
+
+Incomplete Objects: An object can be created without setting critical attributes,
+potentially leading to runtime errors.
+
+Verbosity: You need multiple lines of code to set all attributes, which can be cumbersome for complex objects.
+
+
+2.Parameterized Constructor
+
+This approach initializes attributes at the time of object creation.
+
+Pros:
+
+Immutability: By combining parameterized constructors with the absence of setters,
+you can make objects immutable (read-only after creation). This is useful for thread safety and predictable behavior.
+
+Complete Initialization: Ensures all attributes are set when the object is created,
+reducing the risk of incomplete or invalid states.
+
+Conciseness: Reduces the lines of code required to create fully initialized objects.
+
+
+Cons:
+
+Less Flexibility: All attributes must be provided at the time of creation,
+which might not be ideal if attributes are set dynamically.
+
+Complexity for Large Classes: For classes with many attributes,
+constructors can become unwieldy and harder to manage (can be mitigated with the Builder pattern).
+
+
+
+Why Parameterized Constructor
+
+A- Logical Consistency: It ensures that name and age are always initialized,
+as these are essential attributes of a Person. There’s no scenario where you can forget to set them.
+
+
+Teacher teacher = new Teacher(); // Default constructor
+teacher.setSubject("DSA"); // Missing name and age!
+
+B- Simpler Code in Main: Using constructors makes the code more concise and readable.
+
+
+// With parameterized constructors
+Student student = new Student("Ali", 20, 100);
+
+// With setters
+Student student = new Student();
+student.setName("Ali");
+student.setAge(20);
+student.setStudentId(100);
+
+C- Better Alignment with Interview Expectations: Interviewers often expect
+you to demonstrate how to use constructors and encapsulation effectively.
+
+
+
+When Default Constructor + Setters is Better
+
+There are cases where using default constructors and setters is appropriate:
+
+A- Framework Dependency: Many frameworks (e.g., Spring, Hibernate, Jackson) require a default constructor
+for object instantiation and rely on setters for dependency injection or deserialization.
+
+B- Optional Attributes: If some attributes are optional or need to be set later,
+setters provide the required flexibility.
+
+C- Encapsulation: Setters can enforce rules for modifying attributes, e.g., validating input before assigning it.

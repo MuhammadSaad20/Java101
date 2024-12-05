@@ -1,0 +1,143 @@
+Mastering Wrapper Classes in Java: Autoboxing, Autoboxing, and Their Methods
+Wrapper classes in Java are essential for understanding object-oriented programming and are frequently tested in interviews. Let’s break this topic into key concepts, examples, and interview-relevant points.
+
+
+1. What Are Wrapper Classes?**
+Wrapper classes provide a way to use primitive data types (`int`, `double`, etc.) as objects. Each primitive type has a corresponding wrapper class:
+
+| **Primitive Type** | **Wrapper Class** |
+|---------------------|-------------------|
+| `byte`              | `Byte`           |
+| `short`             | `Short`          |
+| `int`               | `Integer`        |
+| `long`              | `Long`           |
+| `float`             | `Float`          |
+| `double`            | `Double`         |
+| `char`              | `Character`      |
+| `boolean`           | `Boolean`        |
+
+2. Autoboxing and Unboxing**
+a) Autoboxing
+The process of converting a primitive type to its corresponding wrapper class automatically.
+
+
+int num = 10;
+Integer obj = num;  // Autoboxing
+
+
+b) Unboxing
+The reverse process of converting a wrapper class object back to a primitive type.
+
+Integer obj = 20;
+int num = obj;  // Unboxing
+
+
+3. Why Are Wrapper Classes Useful?
+1. **Collections Framework**: Java Collections (like `ArrayList`, `HashMap`) work with objects, not primitives. Wrapper classes are used to store primitive values in collections.
+2. **Utility Methods**: Wrapper classes provide utility methods (e.g., parsing strings to numbers, comparisons).
+3. **Object-Oriented Design**: Enables primitives to be treated as objects, making Java more flexible.
+
+4. Common Methods in Wrapper Classes**
+1. Value Extraction:
+   - `intValue()`, `doubleValue()`, etc., extract primitive values from wrapper objects.
+   Integer obj = 42;
+   int num = obj.intValue();
+
+
+2. Parsing Strings:
+   - `Integer.parseInt()`, `Double.parseDouble()`, etc., convert strings to primitives.
+   String str = "123";
+   int num = Integer.parseInt(str);
+
+
+3. String Conversion:
+   - `toString()` converts wrapper objects to strings.
+   Integer obj = 45;
+   String str = obj.toString();
+
+4. Value Comparison**:
+   - `compareTo()`, `equals()`.
+   Integer a = 5, b = 10;
+   System.out.println(a.compareTo(b));  // Output: -1 (a < b)
+
+
+5.Constants:
+   - Wrapper classes provide constants like `Integer.MAX_VALUE`, `Double.MIN_VALUE`.
+
+
+5. Key Concepts for Interviews**
+a) Autoboxing in Collections**
+Wrapper classes are used when primitives are stored in collections:
+
+ArrayList<Integer> list = new ArrayList<>();
+list.add(10);  // Autoboxing
+int num = list.get(0);  // Unboxing
+
+b) Performance Considerations**
+- Autoboxing and unboxing can lead to overhead.
+- Example Problem**:
+   Integer a = 1000;
+   Integer b = 1000;
+   System.out.println(a == b);  // False (different objects)
+
+   Explanation:
+   - For values outside the range `-128 to 127`, new objects are created.
+   - Use `.equals()` to compare values, not `==`.
+
+c) NullPointerException**
+Unboxing a `null` wrapper object throws a `NullPointerException`.
+
+Integer obj = null;
+int num = obj;  // Throws NullPointerException
+
+
+d) Immutability
+Wrapper classes are immutable, meaning their values cannot be changed once created.
+
+
+
+6. Interview Questions
+1. What is the difference between autoboxing and unboxing?
+   - Autoboxing converts a primitive to a wrapper object.
+   - Unboxing converts a wrapper object to a primitive.
+
+2. What happens when you compare two wrapper objects using `==`?
+   - It compares references, not values. Use `.equals()` for value comparison.
+
+3. Why does autoboxing improve code readability?
+   - It reduces boilerplate code by automating the conversion between primitives and wrapper objects.
+
+4. What are potential pitfalls of using autoboxing?
+   - Overhead in performance due to object creation.
+   - Risk of `NullPointerException` when unboxing a `null` value.
+
+
+
+7. Practical Coding Challenge
+Problem: Find the sum of integers in an `ArrayList<Integer>` while avoiding unboxing-related errors.
+
+import java.util.ArrayList;
+
+public class WrapperExample {
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(null);
+
+        int sum = 0;
+        for (Integer num : numbers) {
+            if (num != null) {  // Avoid NullPointerException
+                sum += num;
+            }
+        }
+        System.out.println("Sum: " + sum);
+    }
+}
+
+8. Best Practices
+1. Avoid unnecessary autoboxing/unboxing in performance-critical code.
+2. Use primitive types where possible to reduce memory usage.
+3. Always check for `null` before unboxing to prevent runtime exceptions.
+4. Use `equals()` for value comparison, not `==`.
+

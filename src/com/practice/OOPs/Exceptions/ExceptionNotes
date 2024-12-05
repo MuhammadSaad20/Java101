@@ -1,0 +1,44 @@
+Types Of Error
+
+- Syntax Error -- compile time
+- Logical Error
+- Runtime Error
+
+
+- The exception handel is a way to handel the runtime errors so that the normal flow of the application can be maintained.
+- Exception is an event that disrupts the norma flow of the program. It is an object which thrown at runtime.
+
+Java Exception and Error Hierarchy
+
+java.lang.Object
+    |
+    +-- java.lang.Throwable
+          |
+          +-- java.lang.Error
+          |     |
+          |     +-- java.lang.VirtualMachineError
+          |     +-- java.lang.OutOfMemoryError
+          |     +-- java.lang.StackOverflowError
+          |     +-- java.lang.LinkageError
+          |     +-- java.lang.ClassFormatError
+          |     +-- java.lang.NoClassDefFoundError
+          |
+          +-- java.lang.Exception
+                |
+                +-- java.lang.RuntimeException
+                |     |
+                |     +-- java.lang.ArithmeticException
+                |     +-- java.lang.NullPointerException
+                |     +-- java.lang.IndexOutOfBoundsException
+                |     +-- java.lang.IllegalArgumentException
+                |
+                +-- java.io.IOException
+                |     |
+                |     +-- java.io.FileNotFoundException
+                |     +-- java.io.EOFException
+                |
+                +-- java.sql.SQLException
+                +-- java.lang.reflect.InvocationTargetException
+                +-- java.net.SocketException
+                +-- java.net.UnknownHostException
+

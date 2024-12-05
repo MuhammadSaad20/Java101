@@ -1,0 +1,140 @@
+Varargs Method Ambiguity in Overloading**
+
+- Varargs (`...`) allows a method to accept zero or more arguments of the same type.
+- Syntax: `methodName(type... args)`
+- Internally, varargs arguments are treated as an array.
+
+
+Ambiguity in Overloading
+
+When a method with varargs is overloaded with another method, ambiguity arises if:
+1. The compiler cannot decide between a varargs method and another overloaded method.
+2. Both methods have compatible parameter lists.
+
+Example of Ambiguity:
+
+public class Test {
+    public void display(int... numbs) {
+        System.out.println("Varargs method called");
+    }
+
+    public void display(int num) {
+        System.out.println("Single argument method called");
+    }
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        test.display(5); // Ambiguous: Which method should be called?
+    }
+}
+
+- When `test.display(5)` is called:
+  - `int... numbs` can accept a single `int` (because it's treated as an array with one element).
+  - `int num` directly matches the argument.
+  - The compiler cannot decide which method to use, resulting in a compilation error.
+
+
+Resolving Ambiguity
+To avoid ambiguity:
+1. Use distinct parameter types.
+2. Avoid overloading with varargs and single-argument methods for the same type.
+
+Resolved Example:
+public class Test {
+    public void display(int num) {
+        System.out.println("Single argument method called");
+    }
+
+    public void display(String... messages) {
+        System.out.println("Varargs method called");
+    }
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        test.display(5);          // Calls the single argument method
+        test.display("Hi", "Saad"); // Calls the varargs method
+    }
+}
+
+2. Pass by Value vs Pass by Reference
+
+What Does Java Use?
+Java is **always pass-by-value**. However, the confusion arises because the value passed for object references is the **memory address** (a reference), making it behave like pass-by-reference.
+
+
+Pass-by-Value
+- A copy of the variable is passed.
+- Changes to the parameter inside the method do **not** affect the original variable.
+
+Example:
+
+public class Test {
+    public static void modifyValue(int num) {
+        num = 10; // Changing the local copy
+    }
+
+    public static void main(String[] args) {
+        int number = 5;
+        modifyValue(number);
+        System.out.println(number); // Outputs: 5 (original value unchanged)
+    }
+}
+
+Pass-by-Reference (Simulated in Objects)
+
+- A copy of the reference is passed.
+- Changes to the object through the reference affect the original object because the reference points to the
+  same memory location.
+
+Example:
+
+class Person {
+    String name;
+}
+
+public class Test {
+    public static void modifyPerson(Person p) {
+        p.name = "Saad"; // Modifies the object through the reference
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.name = "John";
+        modifyPerson(person);
+        System.out.println(person.name); // Outputs: Saad (object modified)
+    }
+}
+
+Key Distinction
+- In Java, the **reference (memory address)** is passed **by value**, not the actual object.
+- If you reassign the reference itself, it does not affect the original object.
+
+Example: Reassigning the Reference
+
+class Person {
+    String name;
+}
+
+public class Test {
+    public static void modifyReference(Person p) {
+        p = new Person(); // Reassigning the reference
+        p.name = "Saad";
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.name = "John";
+        modifyReference(person);
+        System.out.println(person.name); // Outputs: John (original reference unaffected)
+    }
+}
+
+Summary: Pass-by-Value vs Pass-by-Reference
+
+| **Aspect**              | **Pass-by-Value**                             | **Pass-by-Reference**                           |
+|--------------------------|-----------------------------------------------|------------------------------------------------|
+| **Definition**           | A copy of the value is passed to the method.  | A copy of the reference (address) is passed.   |
+| **Applies to**           | Primitive types in Java (`int`, `float`, etc.)| Object references in Java (`Person`, `String`).|
+| **Effect on Original**   | Original variable is unaffected.              | Original object can be modified.               |
+| **Reassignment**         | Reassigning the variable inside the method has no effect outside. | Reassigning the reference inside the method has no effect outside. |
+

@@ -1,0 +1,129 @@
+When you create an object in Java using a statement like:
+
+Type obj = new ObjectType();
+
+The compiler and runtime each play specific roles in determining how the object is treated,
+depending on the reference type (the type before the `=`) and the object type (the type after `new`).
+
+Let's break this down with **logical reasoning** about how the compiler and JVM treat this declaration.
+
+
+Key Concepts
+
+1. Reference Type (`Type`):
+   - The type declared on the left of `=` (e.g., `Shape`, `Animal`, etc.).
+   - Determines **what methods and fields are accessible at compile time**.
+   - The compiler enforces that only methods and fields **declared in this type** can be called on the object.
+
+2. Object Type (`ObjectType`):
+   - The type declared after `new` (e.g., `Circle`, `Dog`, etc.).
+   - Determines **what behavior (method implementation)** is executed at runtime.
+   - If the method is overridden, the **object type's method** is executed.
+
+
+Logical Explanation
+
+1. Object of the Same Type:
+   If you create an object with the same reference and object type:
+   Circle circle = new Circle();
+
+   - The **reference type** and **object type** are both `Circle`.
+   - The compiler and runtime see this as straightforward:
+     - Compile Time: All methods and fields of `Circle` are accessible.
+     - Runtime: Methods execute exactly as defined in the `Circle` class.
+
+   Example:
+   Circle circle = new Circle();
+   circle.draw(); // Calls Circle's draw()
+   circle.getRadius(); // Accessible because it's defined in Circle
+
+
+   Result:
+   No complexity, as both the compiler and runtime know the object is of type `Circle`.
+
+
+2. Object of a Parent Type (Polymorphism):
+   If you create an object with a **parent type reference**:
+   //Shape is parent class and Circle class extend Shape
+
+   Shape shape = new Circle(); //Upcasting
+
+   - The **reference type** is `Shape`, and the **object type** is `Circle`.
+   - The compiler and runtime handle this differently:
+     - **Compile Time:** The compiler limits method access to those declared in `Shape`. Methods specific to `Circle` (like `getRadius()`) cannot be called.
+     - **Runtime:** The JVM checks the **object type (`Circle`)** and executes the overridden version of any methods.
+
+
+   Shape shape = new Circle();
+   shape.draw(); // Calls Circle's draw() because the object is a Circle
+
+    shape.getRadius(); // Compile-time error: getRadius() is not in Shape
+
+
+   **Result:**
+   - This approach allows **polymorphism**, where a single parent type (`Shape`) can handle multiple object types (`Circle`, `Rectangle`, etc.).
+   - **Why useful?** It simplifies code, especially when dealing with collections or generic handling of objects.
+
+
+3. **Why Does the Compiler Restrict Methods?**
+   The compiler enforces **type safety**:
+   - At compile time, the compiler only knows the **reference type**, not the actual object type.
+   - If the compiler allowed access to methods of the object type (`Circle`) but the actual object was of
+      a different type (`Rectangle`), it would lead to runtime errors.
+   - To avoid this, the compiler restricts method access to the reference type.
+
+   **Logical Reasoning:**
+
+   Shape shape = new Circle();
+   shape.getRadius(); // Not allowed, because what if `shape = new Rectangle()` later?
+
+
+   The compiler ensures that code will work regardless of the actual object type at runtime.
+
+
+4. **Object of a Subclass Type**:
+   If you create an object with a **subclass type reference**, it's the opposite of the parent reference case:
+
+
+   Circle circle = (Circle) new Shape(); // This causes runtime errors.
+
+   - The **reference type** (`Circle`) assumes the object is a `Circle`.
+   - If the actual object is not a `Circle` (e.g., a `Shape` object), a **`ClassCastException`** occurs at runtime.
+   - The compiler doesn’t flag this because it trusts the programmer (via the cast), but the runtime throws an error if the types are mismatched.
+
+
+
+Key Examples
+
+Case 1: Same Type
+
+Circle circle = new Circle();
+circle.draw();       // Works fine, calls Circle's draw()
+circle.getRadius();  // Accessible because the reference is Circle
+
+Case 2: Parent Type Reference
+
+Shape shape = new Circle(); //Upcasting
+shape.draw();       // Calls Circle's draw(), runtime decides
+shape.getRadius(); // Compile-time error: getRadius() not in Shape
+
+Case 3: Subclass Type Reference
+
+Circle circle = (Circle) new Shape(); // Causes runtime error //Down casting
+
+Case 4: Parent Type Reference in Collections
+
+Shape[] shapes = {new Circle(), new Rectangle()};
+for (Shape shape : shapes) {
+    shape.draw();   // Calls Circle's or Rectangle's draw() based on runtime type
+}
+
+
+Dynamic Binding and Why Runtime Matters
+
+- At Compile Time: The compiler looks only at the **reference type** to check which methods can be called.
+                   It does not care about the object type.
+- At Runtime: The JVM decides the method to execute based on the **actual object type**, enabling **dynamic binding**.
+
+This is what makes runtime polymorphism powerful: the same reference type can represent different types of objects,
+                                                   and their behavior can change dynamically based on the actual object.

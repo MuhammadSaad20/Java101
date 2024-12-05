@@ -1,0 +1,152 @@
+Abstract Method and Abstraction in Java
+
+What is an Abstract Method?
+- An **abstract method** is a method declared without an implementation (no body).
+- It is meant to be **overridden** by subclasses to provide specific behavior.
+- It is declared using the `abstract` keyword and can only exist inside an **abstract class** or an **interface**.
+
+Example of an Abstract Method:
+
+abstract class Shape {
+    // Abstract method
+    public abstract void draw(); // No body, implementation is deferred to subclasses
+}
+
+What is Abstraction?
+
+Abstraction is the process of hiding implementation details and showing only the essential features of an object.
+
+Why use abstraction?
+- To define a clear **contract** for subclasses.
+- It allows different classes to have **common behavior** defined by a superclass or interface.
+- Reduces complexity by separating **what** a class does from **how** it does it.
+
+Example Using Abstraction:
+
+abstract class Shape {
+    private String color; // Encapsulation
+
+    public Shape(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    // Abstract method
+    public abstract void draw();
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(String color, double radius) {
+        super(color); // Call to the parent class constructor
+        this.radius = radius;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Circle with radius: " + radius + " and color: " + getColor());
+    }
+}
+
+class Rectangle extends Shape {
+    private double length, width;
+
+    public Rectangle(String color, double length, double width) {
+        super(color);
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Rectangle with length: " + length + ", width: " + width + ", and color: " + getColor());
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Shape circle = new Circle("Red", 5.0);
+        Shape rectangle = new Rectangle("Blue", 4.0, 6.0);
+
+        circle.draw(); // Calls Circle's implementation of draw()
+        rectangle.draw(); // Calls Rectangle's implementation of draw()
+    }
+}
+
+How Abstraction Works:
+
+1. Shape` is Abstract:
+   - It defines a common template for `Circle` and `Rectangle` with the method `draw()`.
+   - The method `draw()` is **abstract**, meaning `Shape` provides no implementation but enforces that subclasses implement it.
+
+2. Hiding Implementation:
+   - The `Test` class doesn't know how `draw()` is implemented for `Circle` or `Rectangle`.
+   - It just calls `draw()` on the `Shape` reference, trusting the subclasses to provide the behavior.
+
+
+Abstraction vs Encapsulation
+
+Although abstraction and encapsulation might seem similar, they serve different purposes. Let’s break this down:
+
+| **Feature**      | **Abstraction**                                                    | **Encapsulation**
+|------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Definition*      | Hides implementation details and shows only the essential features | Hides the **state (data)** of an object by restricting access via getters and setters.
+| Focus            | Focuses on **behavior** (what the object can do).                  | Focuses on **state** (how data is managed inside the object).
+| Achieved By      | Abstract classes and interfaces.                                   | Private fields and public getters/setters.
+| Purpose          | To achieve **polymorphism** and define a blueprint for subclasses. | To ensure **data security and integrity** by restricting direct access.
+| Example          | Defining `Shape` as an abstract class with `draw()`.               | Using private `radius` in `Circle` with `getRadius()` for controlled access.
+
+
+Encapsulation Example
+
+class Circle extends Shape {
+    private double radius; // Encapsulation: radius is private
+
+    public Circle(String color, double radius) {
+        super(color); // Call parent constructor
+        this.radius = radius; // Initialize radius
+    }
+
+    public double getRadius() { // Getter for radius
+        return radius;
+    }
+
+    public void setRadius(double radius) { // Setter for radius
+        if (radius > 0) { // Validation
+            this.radius = radius;
+        } else {
+            System.out.println("Radius must be positive!");
+        }
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing a Circle with radius: " + radius + " and color: " + getColor());
+    }
+}
+
+Here:
+- Encapsulation: `radius` is private, but the getter and setter control access.
+- Abstraction: The `draw()` method in the parent class enforces a blueprint that the subclass must follow.
+
+
+
+
+Why Should You Care as a Developer?
+
+- **Abstraction**:
+  - Forces you to focus on **what an object does**, not **how it does it**.
+  - Makes your code **extendable and maintainable** by defining contracts (e.g., `Shape` interface).
+
+- **Encapsulation**:
+  - Protects the internal state of an object.
+  - Improves **data security and integrity** by restricting direct access.
+
+
+
+
+

@@ -1,0 +1,11 @@
+Abstraction: Hides complex implementation details and shows only the essential features of the object.
+
+
+Why Abstraction? When building a car, you don’t need to know how the engine works to drive it.
+                 You just need an interface like the accelerator, brake, and steering.
+
+
+
+Abstract methods define behavior without specifying the details.
+Child classes provide specific implementations.
+

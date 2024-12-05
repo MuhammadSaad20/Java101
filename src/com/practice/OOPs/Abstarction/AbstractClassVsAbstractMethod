@@ -1,0 +1,78 @@
+Comparison Chart: Abstract Class vs Interface
+
+| **Aspect**                | **Abstract Class**                                       | **Interface**                                      |
+|---------------------------|---------------------------------------------------------|---------------------------------------------------|
+| **Definition**            | A class that can have abstract and concrete methods.     | A completely abstract type that defines a contract for classes. |
+| **Methods**               | Can have both **abstract** and **concrete** methods.     | Contains **abstract** methods by default; can have **default** and **static** methods (Java 8+). |
+| **Fields/Variables**      | Can have instance variables with any access modifier.    | Only **public static final** variables (constants). |
+| **Inheritance**           | A class can **extend** only one abstract class.          | A class can **implement** multiple interfaces.    |
+| **Constructors**          | Can have constructors to initialize fields.              | Cannot have constructors.                        |
+| **Purpose**               | For closely related objects to share behavior and state. | For defining common behavior for unrelated classes. |
+| **Access Modifiers**      | Can have `public`, `protected`, and `private` methods.   | All methods are **public** by default.           |
+| **Use Case**              | Use when classes share functionality and a relationship. | Use when classes share common behavior but are not related. |
+| **Code Reuse**            | Supports code reuse via concrete methods.                | No code reuse directly; relies on implementation. |
+
+
+Abstract Method vs Abstract Class
+
+| **Aspect**                | **Abstract Method**                                     | **Abstract Class**                                |
+|---------------------------|--------------------------------------------------------|--------------------------------------------------|
+| **Definition**            | A method with no body; it must be implemented by subclasses. | A class that may contain abstract methods, concrete methods, and fields. |
+| **Purpose**               | Declares a behavior without providing implementation.   | Acts as a blueprint for related subclasses to implement or override methods. |
+| **Where Defined**         | Can only exist inside an abstract class or an interface. | Can exist independently but cannot be instantiated. |
+| **Example**               | `public abstract void draw();`                         | `abstract class Shape { abstract void draw(); }` |
+| **Usage**                 | Forces subclasses to implement the declared behavior.  | Groups shared functionality and enforces some methods to be implemented. |
+
+
+
+Abstract Method Example
+An abstract method declares a behavior but doesn’t define it. Subclasses must implement it.
+
+abstract class Animal {
+    public abstract void sound(); // Abstract method
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Woof");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Meow");
+    }
+}
+
+Abstract Class Example
+An abstract class can have both abstract methods and concrete methods.
+
+```java
+abstract class Animal {
+    public abstract void sound(); // Abstract method
+
+    public void sleep() { // Concrete method
+        System.out.println("Animal is sleeping.");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Woof");
+    }
+}
+
+
+### **Key Differences: Abstract Class vs Abstract Method**
+
+| **Aspect**                | **Abstract Method**                     | **Abstract Class**                     |
+|---------------------------|------------------------------------------|-----------------------------------------|
+| **Definition**            | Declares a method with no implementation. | Declares a class that cannot be instantiated. |
+| **Scope**                 | Exists inside an abstract class or interface. | Exists as a class containing abstract methods. |
+| **Purpose**               | Forces subclasses to implement the method. | Groups related classes and enforces method implementation. |
+| **Example**               | `public abstract void draw();`           | `abstract class Shape { ... }`         |
+
+

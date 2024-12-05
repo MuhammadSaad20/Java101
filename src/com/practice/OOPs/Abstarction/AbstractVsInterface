@@ -1,0 +1,67 @@
+Abstract Class vs Interface: Explanation and Examples
+
+What is an Abstract Class?
+
+An abstract class is a class that:
+- Cannot be instantiated (you can’t create objects of it directly).
+- Can have both:
+  - **Abstract methods** (methods without a body, meant to be implemented by subclasses).
+  - **Concrete methods** (methods with implementation).
+- It serves as a **blueprint** for other classes.
+
+
+Why Use an Abstract Class?
+- When you need to share **common functionality** among related classes.
+- When you want to enforce certain methods to be implemented in all subclasses.
+
+
+What is an Interface?
+
+An **interface** is a completely abstract type in Java that:
+- Defines a **contract** that classes must follow.
+- Contains:
+  - Abstract methods (implicitly `public abstract`).
+  - Default methods (introduced in Java 8, with a body).
+  - Static methods.
+- All fields in an interface are `public static final` by default (constants).
+
+
+Why Use an Interface?
+- When you want to define behavior for unrelated classes (e.g., both `Bird` and `Airplane` can `fly` but don’t share a parent class).
+- To achieve **multiple inheritance** (a class can implement multiple interfaces).
+
+Key Points:
+- Both `WiFiDevice` and `BluetoothDevice` implement `Connectable`.
+- The `connect` method is implemented differently for each class.
+- The `status` method is overridden in `WiFiDevice` but uses the default implementation in `BluetoothDevice`.
+
+
+Abstract Class vs Interface
+
+| **Feature**               | **Abstract Class**                                       | **Interface**                                  |
+|----------------------------|---------------------------------------------------------|------------------------------------------------|
+| **Inheritance**            | A class can extend only one abstract class.             | A class can implement multiple interfaces.     |
+| **Methods**                | Can have both abstract and concrete methods.            | Can have abstract methods, default methods, and static methods. |
+| **Fields**                 | Can have instance variables (not final).                | All fields are `public static final` (constants). |
+| **Use Case**               | Use when classes share common functionality or state.   | Use when unrelated classes share common behavior. |
+
+
+When to Use Abstract Classes or Interfaces
+- **Abstract Class**:
+  - When you want to **reuse code** (shared methods, fields).
+  - When the entities are closely related (e.g., `Payment`, `CreditCardPayment`).
+
+- **Interface**:
+  - When you want to define behavior for **unrelated classes** (e.g., `Flyable` for both `Bird` and `Airplane`).
+  - When you need to achieve **multiple inheritance**.
+
+
+
+Summary of Key Differences
+
+| **Aspect**          | **Abstract Class**                          | **Interface**                     |
+|----------------------|---------------------------------------------|------------------------------------|
+| **Instantiation**    | Cannot be instantiated.                    | Cannot be instantiated.           |
+| **Inheritance**      | A class can only extend one abstract class. | A class can implement multiple interfaces. |
+| **Purpose**          | Code sharing and extensibility.            | Behavior sharing and multiple inheritance. |
+

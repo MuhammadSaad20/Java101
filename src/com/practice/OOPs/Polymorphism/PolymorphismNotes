@@ -1,0 +1,32 @@
+Polymorphism:
+Allows one interface to represent different underlying forms (e.g., method overloading and overriding).
+
+Why Polymorphism?
+You might want to handle different types of shapes (circle, rectangle, etc.)
+but still call the same method to calculate the area.
+
+
+
+Overloading:
+Method overloading happens when multiple methods in the same class have the same name but different
+parameter lists (number or type of arguments).
+It demonstrates compile-time polymorphism, where the method to call is determined at compile time.
+
+Overriding:
+Method overriding happens when a subclass provides a new implementation of a method that is already defined in its parent class.
+It demonstrates runtime polymorphism, where the method to call is determined at runtime.
+
+Key Differences in Overloading vs. Overriding:
+
+Aspect 	              Overloading	                        Overriding
+Where It Happens	  Same class	                        Subclass (child class)
+Method Signature	  Must be different (parameters vary)	Must be the same as parent’s method
+Return Type	          Can vary                              Must match or be compatible
+Polymorphism Type	  Compile-time polymorphism	            Runtime polymorphism
+Keyword Used	      None	                                @Override annotation is optional but recommended
+
+
+POLYMORPHISM -> Overloading (Compile Time)
+POLYMORPHISM -> Overriding  (Run time) (Dynamic Method Dispatch)
+
+

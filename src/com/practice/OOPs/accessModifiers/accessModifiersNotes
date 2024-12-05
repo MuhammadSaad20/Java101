@@ -1,0 +1,25 @@
+| **Context \ Access Modifier**        | **private** | **default (no modifier)** | **protected** | **public** |
+|--------------------------------------|-------------|----------------------------|---------------|------------|
+| **Same Class**                       | Yes         | Yes                        | Yes           | Yes        |
+| **Same Package**                     | No          | Yes                        | Yes           | Yes        |
+| **Subclass (same package)**          | No          | Yes                        | Yes           | Yes        |
+| **Subclass (different package)**     | No          | No                         | Yes           | Yes        |
+| **Different Package (non-subclass)** | No          | No                         | No            | Yes        |
+
+
+-----------------------------------------------------------------------------------------------------------------
+From Class POV Fields and Methods
+
+Private ->   Only access in same class
+Public ->    Anyone can access
+Protected -> Only access which extend the class
+Default ->   No keyword we can access thing from same package
+--------------------------------------------------------------------------------------------------------------------
+
+Can we make private constructor?
+
+1- Let's suppose we have class has which has only methods and  we don want that no one can create its object so we
+make constructor private nad methods public static for example class which has utility functions
+
+2- We only want to create a class which has only one time object created (singleton pattern)
+
