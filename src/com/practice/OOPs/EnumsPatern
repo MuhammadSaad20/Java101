@@ -1,0 +1,159 @@
+Enums in Java follow the **Singleton Design Pattern**,
+but they can also be considered as implementing a version of the **Strategy Design Pattern**
+when they include methods overridden by each constant.
+Let’s dive deeper into the patterns enums follow and how they work.
+
+
+1. Singleton Design Pattern in Enums
+Every constant in an `enum` is a **singleton**—a single, globally accessible instance of that constant.
+
+
+Example of Singleton Behavior
+
+enum SingletonEnum {
+    INSTANCE;
+
+    public void displayMessage() {
+        System.out.println("I am a singleton instance!");
+    }
+}
+
+public class SingletonExample {
+    public static void main(String[] args) {
+        SingletonEnum instance1 = SingletonEnum.INSTANCE;
+        SingletonEnum instance2 = SingletonEnum.INSTANCE;
+
+        System.out.println(instance1 == instance2); // Output: true
+        instance1.displayMessage();
+    }
+}
+
+How this works:
+  - `INSTANCE` is the only instance of `SingletonEnum` created in the JVM.
+  - It ensures **thread-safety**, **serialization safety**, and a single instance globally accessible.
+
+Why use an Enum for Singleton?
+  - Enums are considered the best way to implement a Singleton in Java because:
+    - Java ensures that an enum constant is instantiated only once.
+    - It handles serialization for you, unlike other singleton implementations that may require additional effort.
+
+
+2. Strategy Design Pattern in Enums**
+
+Enums with overridden methods (like the `ADD` and `SUBTRACT` examples) follow the **Strategy Design Pattern**.
+Each enum constant represents a different strategy (behavior).
+
+
+Example of Strategy Pattern:
+
+enum Operation {
+    ADD {
+        @Override
+        public int apply(int a, int b) {
+            return a + b;
+        }
+    },
+    SUBTRACT {
+        @Override
+        public int apply(int a, int b) {
+            return a - b;
+        }
+    };
+
+    public abstract int apply(int a, int b);
+}
+
+public class StrategyPatternExample {
+    public static void main(String[] args) {
+        Operation add = Operation.ADD;
+        Operation subtract = Operation.SUBTRACT;
+
+        System.out.println(add.apply(5, 3));       // Output: 8
+        System.out.println(subtract.apply(5, 3));  // Output: 2
+    }
+}
+
+
+- How this works:
+  - `ADD` and `SUBTRACT` act as strategies.
+  - The behavior is encapsulated within each constant, and you can switch between behaviors dynamically.
+
+- Why use Enums for Strategy?
+  - It eliminates the need for separate classes for each strategy, making the code concise.
+  - Ensures type safety by restricting the set of strategies to predefined constants.
+
+
+3. State Design Pattern in Enums
+
+Enums can also be used to represent **states**.
+Each constant in the enum can encapsulate specific behavior for a particular state.
+
+ Example of State Pattern:
+enum TrafficLight {
+    RED {
+        @Override
+        public TrafficLight next() {
+            return GREEN;
+        }
+    },
+    GREEN {
+        @Override
+        public TrafficLight next() {
+            return YELLOW;
+        }
+    },
+    YELLOW {
+        @Override
+        public TrafficLight next() {
+            return RED;
+        }
+    };
+
+    public abstract TrafficLight next();
+}
+
+public class StatePatternExample {
+    public static void main(String[] args) {
+        TrafficLight current = TrafficLight.RED;
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Current Light: " + current);
+            current = current.next();
+        }
+    }
+}
+
+Output:
+
+Current Light: RED
+Current Light: GREEN
+Current Light: YELLOW
+Current Light: RED
+Current Light: GREEN
+
+
+- How this works:
+  - Each traffic light state knows its **next state**.
+  - The behavior of transitioning between states is encapsulated within the enum constants.
+
+- Why use Enums for State?
+  - Makes the code cleaner and more intuitive by representing states as constants.
+  - Encapsulates state-specific behavior within the enum constants.
+
+
+Summary of Patterns Enums Can Follow
+
+| **Pattern**          | **How Enums Fit**                                                                                 | **Example**                                  |
+|-----------------------|---------------------------------------------------------------------------------------------------|----------------------------------------------|
+| Singleton             | Each enum constant is a globally accessible singleton.                                           | `INSTANCE` in an enum to implement Singleton.|
+| Strategy              | Enums with overridden methods define distinct strategies for each constant.                      | `ADD`, `SUBTRACT` overriding `apply()`.      |
+| State                 | Enum constants represent states with transitions encapsulated as behavior.                       | `TrafficLight` transitioning states.         |
+
+
+Which Pattern Is Used?
+- If you use an enum like `SingletonEnum.INSTANCE` → **Singleton Pattern**.
+- If you override methods for behavior in constants → **Strategy Pattern**.
+- If you represent transitions between states → **State Pattern**.
+
+Enums are flexible and can be tailored to follow the appropriate pattern based on the use case.
+

@@ -1,0 +1,124 @@
+What is Type Safety in Java?
+
+Type safety** means that a programming language prevents type errors during the compilation or runtime by ensuring variables,
+expressions, or data are used only in ways consistent with their declared data types.
+
+Java is a **type-safe language**, meaning it checks and enforces data type rules at **compile time** to avoid unintended
+or illegal operations.
+
+
+Why is Type Safety Important?
+
+1. **Error Prevention**: It reduces runtime errors by catching type mismatches during compilation.
+2. **Data Integrity**: Ensures only valid data types are used, maintaining consistency in code.
+3. **Code Readability and Maintainability**: Improves understanding of the code by ensuring variables are used appropriately.
+4. **Security**: Prevents certain vulnerabilities, such as type-related exploits.
+
+
+
+Type Safety in Practice
+
+1. Primitive Type Safety:
+   Java enforces strict rules when assigning or using primitive types. For example:
+
+   int number = 10;
+   String text = "Hello";
+
+   // Compilation Error: Cannot assign String to int
+   number = text; // Not allowed
+
+2. Generic Type Safety:
+   Generics ensure type safety for collections and other parameterized types.
+
+   List<String> list = new ArrayList<>();
+   list.add("Hello");
+
+   // Compilation Error: Cannot add an Integer to a List of Strings
+   list.add(123); // Not allowed
+
+3. Enum Type Safety:
+   Enums provide type safety by restricting variables to a predefined set of constants.
+
+   enum Color { RED, GREEN, BLUE }
+   Color color = Color.RED;
+
+   // Compilation Error: Cannot assign String to Color
+   color = "Yellow"; // Not allowed
+
+4. Method and Parameter Type Safety:
+   Java enforces type safety for method arguments.
+
+   public void printNumber(int number) {
+       System.out.println(number);
+   }
+
+   // Compilation Error: Cannot pass String to a method expecting int
+   printNumber("Hello"); // Not allowed
+
+
+
+How Does Java Achieve Type Safety?**
+1. **Static Typing**: All variables must have a defined type at the time of declaration.
+2. **Compile-Time Checking**: The compiler checks for type mismatches before the program runs.
+3. **Generics**: Introduced in Java 5, generics enforce type safety in collections, methods, and classes.
+4. **Strict Conversion Rules**: Implicit type conversions only happen when they are safe, e.g., widening conversions (int → long).
+
+
+Non-Type Safe Scenarios in Java
+
+While Java is type-safe, certain features can bypass this safety:
+1. Raw Types:
+
+   List list = new ArrayList();
+   list.add("String");
+   list.add(10); // No error here, but type mismatch can occur later
+
+2. Type Casting:
+   Unsafe casting can lead to runtime errors.
+
+   Object obj = "Hello";
+   Integer num = (Integer) obj; // Runtime Error: ClassCastException
+
+
+
+Examples of Type Safety
+
+Without Type Safety:
+
+List list = new ArrayList();
+list.add("Hello");
+list.add(123);
+
+for (Object obj : list) {
+    // Risk of ClassCastException at runtime
+    String str = (String) obj;
+    System.out.println(str);
+}
+
+
+With Type Safety (Generics):
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+// list.add(123); // Compilation Error
+
+for (String str : list) {
+    // No need for casting
+    System.out.println(str);
+}
+
+
+Key Points for Interviews
+1. **Definition**: Type safety ensures variables and data are used in ways consistent with their declared types.
+2. **Java Features Ensuring Type Safety**:
+   - Static typing
+   - Compile-time checks
+   - Generics
+   - Enum usage
+3. **Advantages**:
+   - Fewer runtime errors
+   - Easier debugging
+   - Improved code readability and maintainability
+4. **Examples of Non-Type Safety**:
+   - Raw types
+   - Explicit casting
