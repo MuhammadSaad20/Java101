@@ -8,3 +8,10 @@ public class Dog extends Animal implements Interface1,Interface2
 {
          //you should implement all methods here...
 }
+
+
+Runnable vs Thread: https://engineeringdigest.medium.com/multithreading-in-java-39f34724bbf6
+
+Use Runnable when you want to separate the task from the thread, allowing the class to extend another class if needed.
+Extend Thread if you need to override
+Thread methods or if the task inherently requires direct control over the thread itself, though this limits inheritance.
