@@ -1,0 +1,10 @@
+Can we extern implement at same time for a class In Java?
+
+You can able to declare extends and implements together.But one condition you have to declare extends before implements keyword.
+
+// example
+
+public class Dog extends Animal implements Interface1,Interface2
+{
+         //you should implement all methods here...
+}
