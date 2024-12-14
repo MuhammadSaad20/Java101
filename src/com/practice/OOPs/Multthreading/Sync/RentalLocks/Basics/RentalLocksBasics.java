@@ -4,6 +4,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class RentalLocksBasics {
 
     private final ReentrantLock lock = new ReentrantLock();
+
     public  void outerMethod(){
         lock.lock();
         try
