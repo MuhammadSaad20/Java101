@@ -1,0 +1,12 @@
+Two Types Of Lock:
+
+1- Intrinsic
+
+-There are built into every object In Java
+-There are by default we do not see them.
+-When you are used synchronized keyword you are using this automatic locks.
+
+2- Explicit
+
+-There are more advance locks you can control yourself  using java.util.concurrent.locks
+-Yourself explicitly say when to Lock or unlock
