@@ -5,7 +5,8 @@ public class Counter {
     public int counter=0; //shared resource
 
 
-    //Critical Area of our code
+    //The Critical Area of our code
+    //Synchronize keyword basically locks, so one thread used one at a time
 
     /*
     If we removed synchronized keyword so its not losing may be data loss
