@@ -1,0 +1,14 @@
+DeadLocks:
+
+A deadlock occurs in concurrent programming when two or more threads are blocked forever,
+each waiting for the other to release a resource.
+This typically happens when threads hold locks on resources and request additional locks held by other threads.
+
+Deadlock occurs:
+
+1- Mutual Exclusion: Only one thread access one at a time
+2- Hold and Wait: A thread holding at least ons resources is waiting to acquired additional resource held by other thread
+3- No Preemption: Resource cannot forcibly taken from thread holding them
+4- Circular wait: A set of threads is waiting for each other in a circular chain
+
+
