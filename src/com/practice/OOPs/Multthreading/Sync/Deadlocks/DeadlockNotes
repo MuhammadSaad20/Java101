@@ -11,4 +11,5 @@ Deadlock occurs:
 3- No Preemption: Resource cannot forcibly taken from thread holding them
 4- Circular wait: A set of threads is waiting for each other in a circular chain
 
+we can prevent by managing this using lock in order
 
