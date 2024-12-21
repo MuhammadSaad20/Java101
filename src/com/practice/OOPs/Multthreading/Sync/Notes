@@ -10,3 +10,10 @@ Explicit
 
 -These are more advance locks you can control yourself using the lock class for java.util.concurrent.locks
 -You explicitly say when u want to lock or unlock. giving u more control
+
+Synchronization Locks ISSUE:
+- NO Fairness ( any one random thread start first)
+- Blocking (waiting for finish on thread )
+- No Interruptible
+- Read / Write Lock
+
