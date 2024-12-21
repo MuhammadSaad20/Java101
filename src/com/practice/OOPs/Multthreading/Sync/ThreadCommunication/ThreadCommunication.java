@@ -15,7 +15,7 @@ class SharedResource {
         data = value;
         hasData = true;
         System.out.println("Produced: " + value);
-        notify();
+        notify(); //If multiple thread waiting we can say notifyAll()
     }
 
     public synchronized int consume() {
@@ -28,7 +28,7 @@ class SharedResource {
         }
         hasData = false;
         System.out.println("Consumed: " + data);
-        notify();
+        notify(); //If multiple thread waiting we can say notifyAll()
         return data;
     }
 }
