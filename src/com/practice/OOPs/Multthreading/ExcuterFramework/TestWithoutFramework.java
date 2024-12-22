@@ -20,7 +20,7 @@ public class TestWithoutFramework {
     public static void factorialWithThread() throws InterruptedException {
         long startTime= System.currentTimeMillis();// 1 Jan 1970
         Thread [] threads = new Thread[9];
-        for(int i=1;i<=10;i++){
+        for(int i=1;i<10;i++){
            // Thread.sleep(1000);
             int finalI=i;
              threads[i-1] = new Thread( ()->{
